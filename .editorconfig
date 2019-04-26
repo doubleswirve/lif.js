@@ -1,0 +1,15 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# Top-most EditorConfig file
+root = true
+
+# Conf that applies to all files
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+insert_final_newline = true
+
+# 2-space indented files
+[*.{css,html,js,json,md}]
+indent_size = 2
