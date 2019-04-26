@@ -72,7 +72,7 @@ function MyElementWrapped (dispatch) {
 }
 
 //
-function weBelieveInNothing (name, wrapped) {
+function liffick (name, wrapped) {
   function connect (state, shadowRoot) {
     async function dispatch (func, state) {
       try {
@@ -101,7 +101,7 @@ function weBelieveInNothing (name, wrapped) {
 }
 
 //
-weBelieveInNothing('my-element', MyElementWrapped);
+liffick('my-element', MyElementWrapped);
 
 render(
   html`
