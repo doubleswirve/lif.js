@@ -1,5 +1,5 @@
 import {html} from 'https://unpkg.com/lit-html?module';
-import {stateless} from '../liffick/liffick.js';
+import {stateless} from '../liff/liff.js';
 
 const HelloMessage = props => {
   return html`

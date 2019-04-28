@@ -1,4 +1,4 @@
-# liffick
+# liff
 
 - [ ] how to hook to global store?
 - [ ] router?

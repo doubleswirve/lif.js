@@ -1,5 +1,5 @@
 import {html} from 'https://unpkg.com/lit-html?module';
-import {stateful} from '../liffick/liffick.js';
+import {stateful} from '../liff/liff.js';
 import './ButtonCounter.js';
 
 function tick (_) {
