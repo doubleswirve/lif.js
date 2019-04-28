@@ -1,7 +1,9 @@
 import {html} from 'https://unpkg.com/lit-html?module';
 import {stateless} from '../liff/liff.js';
 
-function StarCounter () {
+function StarCounter ({
+  toClickUponAStar = () => {},
+}) {
   return html`
     <style>
       span {
@@ -9,7 +11,10 @@ function StarCounter () {
         margin-right: 2px;
       }
     </style>
-    <span>*</span>
+    <span @click=${e => {
+      e.preventDefault();
+      toClickUponAStar();
+    }}>*</span>
   `;
 }
 

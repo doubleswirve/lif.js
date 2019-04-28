@@ -26,7 +26,15 @@ const ButtonCounter = dispatch => (props, state) => {
       </button>
       <div>
         ${[...Array(state).keys()].map(
-          () => html`<star-counter .Props=${null}></star-counter>`
+          () => html`
+            <star-counter
+              .Props=${{
+                toClickUponAStar () {
+                  alert(`There are ${state} stars!`);
+                }
+              }}
+            ></star-counter>
+          `
         )}
       </div>
     </div>
