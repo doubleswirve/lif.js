@@ -3,6 +3,7 @@ import {stateless} from './liff/liff.js';
 import './components/HelloMessage.js';
 import './components/ButtonCounter.js';
 import './components/ClockButton.js';
+import './components/TodoApp.js';
 
 const AppContainer = props => html`
   <div>
@@ -14,6 +15,7 @@ const AppContainer = props => html`
     >
     </button-counter>
     <clock-button .Props=${null}></clock-button>
+    <todo-app .Props=${null}></todo-app>
   </div>
 `;
 
