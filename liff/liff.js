@@ -12,14 +12,16 @@ function getPropsHandler (wrapped, container, initialState) {
   let _props;
   let _state = initialState;
 
-  const component = wrapped(async (func, state) => {
+  async function dispatch (func, state, ...args) {
     _state = await getNextState(func, state);
 
     const res = component(_props, _state);
     render(res, container);
 
     return _state;
-  });
+  }
+
+  const component = wrapped(dispatch);
 
   return function (props) {
     _props = props;
