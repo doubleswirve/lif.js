@@ -1,8 +1,8 @@
 import {render} from 'https://unpkg.com/lit-html?module';
 
-async function getNextState (func, state) {
+async function getNextState (func, state, args) {
   try {
-    return await func(await state);
+    return await func(await state, ...args);
   } catch (err) {
     return await err;
   }
@@ -13,7 +13,7 @@ function getPropsHandler (wrapped, container, initialState) {
   let _state = initialState;
 
   async function dispatch (func, state, ...args) {
-    _state = await getNextState(func, state);
+    _state = await getNextState(func, state, args);
 
     const res = component(_props, _state);
     render(res, container);
