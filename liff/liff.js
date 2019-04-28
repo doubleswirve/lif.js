@@ -15,7 +15,7 @@ function getPropsHandler (wrapped, container, initialState) {
   async function dispatch (func, state, ...args) {
     _state = await getNextState(func, state, args);
 
-    const res = component(_props, _state);
+    const res = component(_props, _state, container);
     render(res, container);
 
     return _state;
@@ -26,7 +26,7 @@ function getPropsHandler (wrapped, container, initialState) {
   return function (props) {
     _props = props;
 
-    const res = component(_props, _state);
+    const res = component(_props, _state, container);
     render(res, container);
   };
 }
@@ -53,7 +53,7 @@ export function stateful (name, wrapped, initialState) {
 export function stateless (name, component) {
   customElements.define(name, class extends HTMLElement {
     set Props (props) {
-      const res = component(props);
+      const res = component(props, this._shadowRoot);
       render(res, this._shadowRoot);
     }
 
