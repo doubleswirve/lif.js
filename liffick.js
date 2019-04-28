@@ -1,40 +1,48 @@
 import {render} from 'https://unpkg.com/lit-html?module';
 
-// Register dispatcher with stateful component
-function connect (wrapped, el, initialState) {
-  el._state = initialState;
-
-  async function dispatch (func, state) {
-    try {
-      el._state = await func(await state);
-    } catch (err) {
-      el._state = err;
-    }
-    draw(el);
-    return el._state;
+async function getNextState (func, state) {
+  try {
+    return await func(await state);
+  } catch (err) {
+    return await err;
   }
-
-  return wrapped(dispatch);
 }
 
-function draw (el) {
-  const result =
-    el._component(el._props, el._state, el._shadowRoot);
-  render(result, el._shadowRoot);
+function getPropsHandler (wrapped, container, initialState) {
+  let _props;
+  let _state = initialState;
+
+  const component = wrapped(async (func, state) => {
+    _state = await getNextState(func, state);
+
+    const res = component(_props, _state);
+    render(res, container);
+
+    return _state;
+  });
+
+  return function (props) {
+    _props = props;
+
+    const res = component(_props, _state);
+    render(res, container);
+  };
 }
 
 // Create component with internal state
-export function stateful (name, wrapped, initialState = {}) {
+export function stateful (name, wrapped, initialState) {
   customElements.define(name, class extends HTMLElement {
     set Props (props) {
-      this._props = props;
-      draw(this);
+      this._propsHandler(props);
     }
 
     constructor () {
       super();
-      this._shadowRoot = this.attachShadow({mode: 'open'});
-      this._component = connect(wrapped, this, initialState);
+      this._propsHandler = getPropsHandler(
+        wrapped,
+        this.attachShadow({mode: 'open'}),
+        initialState
+      );
     }
   });
 }
@@ -43,8 +51,8 @@ export function stateful (name, wrapped, initialState = {}) {
 export function stateless (name, component) {
   customElements.define(name, class extends HTMLElement {
     set Props (props) {
-      const result = component(props, this._shadowRoot);
-      render(result, this._shadowRoot);
+      const res = component(props);
+      render(res, this._shadowRoot);
     }
 
     constructor () {
