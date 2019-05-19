@@ -1,5 +1,5 @@
 import {html} from 'https://unpkg.com/lit-html?module';
-import {stateless} from '../liff/liff.js';
+import {stateless} from '../lif/lif.js';
 
 function TodoItem (props) {
   return html`

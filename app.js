@@ -1,5 +1,5 @@
 import {html, render} from 'https://unpkg.com/lit-html?module';
-import {stateless} from './liff/liff.js';
+import {stateless} from './lif/lif.js';
 import './components/HelloMessage.js';
 import './components/ButtonCounter.js';
 import './components/ClockButton.js';

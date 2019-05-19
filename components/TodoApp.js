@@ -1,5 +1,5 @@
 import {html} from 'https://unpkg.com/lit-html?module';
-import {stateful} from '../liff/liff.js';
+import {stateful} from '../lif/lif.js';
 import './TodoText.js';
 import './TodoItem.js';
 
