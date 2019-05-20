@@ -25,6 +25,7 @@ stateful(
           font-size: 2em;
         }
       </style>
+      <h1>simple-counter</h1>
       <button
         @click=${() => dispatch(inc)}
       >
