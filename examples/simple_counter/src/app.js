@@ -1,4 +1,4 @@
-import {html, render} from 'https://unpkg.com/lit-html?module';
+import {html, render} from '../../../node_modules/lit-html/lit-html.js';
 import stateful from '../../../lif/stateful.js';
 
 const INITIAL_COUNT = 0;
