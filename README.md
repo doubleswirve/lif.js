@@ -1,5 +1,6 @@
-# liff
+# lif.js
 
+- [ ] pull down/npm `lit-html`
 - [ ] how to hook to global store?
 - [ ] router?
 - [ ] remove `.Props` requirement?
