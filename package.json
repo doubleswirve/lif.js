@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/doubleswirve/lif.js/issues"
   },
-  "homepage": "https://github.com/doubleswirve/lif.js#readme"
+  "homepage": "https://github.com/doubleswirve/lif.js#readme",
+  "dependencies": {
+    "lit-html": "1.0.0"
+  }
 }
