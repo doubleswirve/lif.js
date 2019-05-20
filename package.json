@@ -1,0 +1,22 @@
+{
+  "name": "lif",
+  "version": "1.0.0",
+  "description": "the front-end framework for perfectionists without ethics",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doubleswirve/lif.js.git"
+  },
+  "author": "doubleswirve",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/doubleswirve/lif.js/issues"
+  },
+  "homepage": "https://github.com/doubleswirve/lif.js#readme"
+}
