@@ -7,6 +7,12 @@ export default class extends HTMLElement {
     this.render();
   }
 
+  set state (state) {
+    this._state = state;
+    // To be implemented by the subclass
+    this.render();
+  }
+
   constructor () {
     super();
 

@@ -21,11 +21,6 @@ async function getNextState (func, state, args) {
  */
 export default function (name, component, initialState) {
   customElements.define(name, class extends Base {
-    set state (state) {
-      this._state = state;
-      this.render();
-    }
-
     constructor () {
       super();
 
