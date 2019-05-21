@@ -1,33 +1,60 @@
 // TODO: Rough sketch...
+const STATECHANGE_EVENT = 'lif.statechange';
+const statechange = new Event(STATECHANGE_EVENT);
 
 class Store {
   get state () {
-    // Clone?
     return this._state;
   }
 
   constructor (initialState) {
+    this._actions = {};
+    this._initialState = initialState;
+    this._state = initialState;
   }
 
-  registerAction (key, func) {
-    // key should be unique to store instance
+  register (key, func) {
+    this._actions[key] = func;
   }
 
-  // Async?
-  send (key, ...args) {
-    const func = this._actions[key];
-    func(this, ...args);
-    // Error if key is not found...
+  reset () {
+    this.setState(initialState);
   }
 
-  // Async?
-  setState (state) {
-    if (this._state === undefined) {
-      this._state = state;
+  // TODO:...
+  async send (key, ...args) {
+    if (!this._actions[key]) {
+      return new Error(`${key} not found`);
     }
-    // ...
-    // Check if object-esque; do a merge
-    // Array?
-    // Primitive?
+
+    this.setState(await this._actions[key](this, ...args));
+  }
+
+  setState (state) {
+    if (
+      this._state === undefined ||
+      ({}).toString.call(state) !== '[object Object]'
+    ) {
+      this._state = state;
+    } else {
+      this._state = {
+        ...this._state,
+        state
+      }
+    }
+
+    dispatchEvent(statechange);
+  }
+
+  subscribe (func, context) {
+    addEventListener(STATECHANGE_EVENT, func);
+  }
+
+  unsubscribe (func, context) {
+    removeEventListener(STATECHANGE_EVENT, func);
   }
 }
+
+export default function (initialState) {
+  return new Store(initialState);
+};
