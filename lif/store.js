@@ -18,7 +18,7 @@ class Store {
   }
 
   reset () {
-    this.setState(initialState);
+    this.setState(this._initialState);
   }
 
   // TODO:...
@@ -39,7 +39,7 @@ class Store {
     } else {
       this._state = {
         ...this._state,
-        state
+        ...state
       }
     }
 
