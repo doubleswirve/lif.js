@@ -1,14 +1,15 @@
 // TODO: Rough sketch...
-const STATECHANGE_EVENT = 'lif.statechange';
-const statechange = new Event(STATECHANGE_EVENT);
-
 class Store {
   get state () {
     return this._state;
   }
 
   constructor (initialState) {
+    // @see https://gist.github.com/anasnakawa/9205494
+    // @see https://gist.github.com/gordonbrander/2230317
     this._actions = {};
+    this._id = `LIF.${Math.random().toString(36).substr(2, 9)}`;
+    this._e = new Event(this._id);
     this._initialState = initialState;
     this._state = initialState;
   }
@@ -43,15 +44,15 @@ class Store {
       }
     }
 
-    dispatchEvent(statechange);
+    dispatchEvent(this._e);
   }
 
   subscribe (func, context) {
-    addEventListener(STATECHANGE_EVENT, func);
+    addEventListener(this._id, func);
   }
 
   unsubscribe (func, context) {
-    removeEventListener(STATECHANGE_EVENT, func);
+    removeEventListener(this._id, func);
   }
 }
 
