@@ -8,7 +8,7 @@ function inc (state) {
 }
 
 function dec (state) {
-  return state < 1 ? INITIAL_COUNT : state - 1;
+  return state - 1;
 }
 
 function reset (_) {
@@ -23,6 +23,10 @@ stateful(
         pre {
           font-family: Consolas, monospace;
           font-size: 2em;
+        }
+
+        .-negative {
+          color: red;
         }
       </style>
       <h1>simple-counter</h1>
@@ -41,9 +45,9 @@ stateful(
       >
         reset
       </button>
-      <pre>
+      <pre class=${state < 0 ? '-negative' : ''}>
         (${state})
-        ${[...Array(state).keys()].map(_ => '*')}
+        ${[...Array(Math.abs(state)).keys()].map(_ => '*')}
       </pre>
     `;
   },
