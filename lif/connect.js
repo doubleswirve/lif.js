@@ -4,7 +4,7 @@ import Base from './base.js';
 /**
  * @param {string}   name
  * @param {Function} component
- * @param {Store}    store
+ * @param {Object}   store
  */
 export default function (name, component, store) {
   customElements.define(name, class extends Base {

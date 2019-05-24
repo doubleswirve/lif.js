@@ -34,8 +34,7 @@ export default function (name, component, initialState) {
     }
 
     render () {
-      const res =
-        this._component(this._props, this._state, this._shadowRoot);
+      const res = this._component(this._props, this._state);
       render(res, this._shadowRoot);
     }
   });

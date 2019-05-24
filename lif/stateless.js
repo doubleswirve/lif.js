@@ -8,7 +8,7 @@ import Base from './base.js';
 export default function (name, component) {
   customElements.define(name, class extends Base {
     render () {
-      const res = component(this._props, this._shadowRoot);
+      const res = component(this._props);
       render(res, this._shadowRoot);
     }
   });
