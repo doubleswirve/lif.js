@@ -11,6 +11,11 @@ stateless('todo-item', ({todo, toggleTodo, removeTodo}) => {
 
       label {
         cursor: pointer;
+        flex: 1;
+      }
+
+      label:hover {
+        background-color: #f5f5f5;
       }
     </style>
     <li>
