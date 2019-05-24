@@ -64,11 +64,11 @@ class Store {
     dispatchEvent(this._e);
   }
 
-  subscribe (func, context) {
+  subscribe (func) {
     addEventListener(this._id, func);
   }
 
-  unsubscribe (func, context) {
+  unsubscribe (func) {
     removeEventListener(this._id, func);
   }
 }
