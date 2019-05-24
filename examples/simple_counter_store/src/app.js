@@ -1,6 +1,6 @@
 import {html, render} from '../../../node_modules/lit-html/lit-html.js';
 import createStore from '../../../lif/store.js';
-import connect from '../../../lif/stateless_store.js';
+import connect from '../../../lif/connect.js';
 
 let store = createStore({count: 10, type: 'DEC'});
 
