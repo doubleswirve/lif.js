@@ -1,28 +1,24 @@
 import {html, render} from '../../../node_modules/lit-html/lit-html.js';
-import createStore from '../../../lif/store.js';
 import connect from '../../../lif/connect.js';
-
-let store = createStore({count: 10, type: 'DEC'});
-
-store.register('INC', ({state}) => ({count: state.count + 1}));
-store.register('DEC', ({state}) => ({count: state.count - 1}));
-store.register('TYP', (_, type) => ({type}));
+import store from './store.js';
+import {increment, decrement, changeType, reset} from './actions.js';
+import {displayByNumSys} from './utils.js'
 
 connect(
   'counter-buttons',
-  ({reset, send}) => _ => html`
+  _ => _ => html`
     <button
-      @click=${() => send('INC')}
+      @click=${increment}
     >
       inc
     </button>
     <button
-      @click=${() => send('DEC')}
+      @click=${decrement}
     >
       dec
     </button>
     <button
-      @click=${() => reset()}
+      @click=${reset}
     >
       reset
     </button>
@@ -32,9 +28,9 @@ connect(
 
 connect(
   'counter-display-type',
-  ({send, state}) => _ => html`
+  ({state}) => _ => html`
     <select
-      @change=${e => send('TYP', e.target.value)}
+      @change=${e => changeType(e.target.value)}
     >
       ${['DEC', 'BIN'].map(type => html`
         <option
@@ -49,28 +45,17 @@ connect(
   store
 );
 
-function display ({count, type}) {
-  switch (type) {
-    case 'BIN':
-      // @see https://stackoverflow.com/a/16155417/1858091
-      return (count >>> 0).toString(2);
-    case 'DEC':
-      return count;
-    default:
-      return 'N/A';
-  }
-}
-
 connect(
   'counter-display',
   ({state}) => _ => html`
     <style>
-      code {
+      code,
+      pre {
         font-family: Consolas, monospace;
         font-size: 2em;
       }
     </style>
-    <code>(${display(state)})</code>
+    <code>(${displayByNumSys(state)})</code>
     <pre>${JSON.stringify(state, null, 2)}</pre>
   `,
   store
