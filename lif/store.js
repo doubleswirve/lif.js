@@ -1,5 +1,9 @@
 // TODO: Rough sketch...
 class Store {
+  get initialState () {
+    return this._initialState;
+  }
+
   get state () {
     return this._state;
   }
@@ -24,6 +28,11 @@ class Store {
 
   register (key, func) {
     this._actions[key] = func;
+
+    // Allow for "actions" sorta...
+    return (...args) => {
+      this.send(key, ...args);
+    };
   }
 
   reset () {
