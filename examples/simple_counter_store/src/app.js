@@ -10,19 +10,19 @@ store.register('TYP', (_, type) => ({type}));
 
 connect(
   'counter-buttons',
-  store => _ => html`
+  ({reset, send}) => _ => html`
     <button
-      @click=${() => store.send('INC')}
+      @click=${() => send('INC')}
     >
       inc
     </button>
     <button
-      @click=${() => store.send('DEC')}
+      @click=${() => send('DEC')}
     >
       dec
     </button>
     <button
-      @click=${() => store.reset()}
+      @click=${() => reset()}
     >
       reset
     </button>
@@ -32,13 +32,13 @@ connect(
 
 connect(
   'counter-display-type',
-  store => _ => html`
+  ({send, state}) => _ => html`
     <select
-      @change=${e => store.send('TYP', e.target.value)}
+      @change=${e => send('TYP', e.target.value)}
     >
       ${['DEC', 'BIN'].map(type => html`
         <option
-          .selected=${store.state.type === type}
+          .selected=${state.type === type}
           value=${type}
         >
           ${type}
@@ -63,18 +63,22 @@ function display ({count, type}) {
 
 connect(
   'counter-display',
-  store => _ => html`
+  ({state}) => _ => html`
     <style>
       code {
         font-family: Consolas, monospace;
         font-size: 2em;
       }
     </style>
-    <code>(${display(store.state)})</code>
-    <pre>${JSON.stringify(store.state, null, 2)}</pre>
+    <code>(${display(state)})</code>
+    <pre>${JSON.stringify(state, null, 2)}</pre>
   `,
   store
 );
+
+store.subscribe(() => {
+  console.log(store.state);
+});
 
 render(
   html`
