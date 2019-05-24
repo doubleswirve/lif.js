@@ -12,6 +12,14 @@ class Store {
     this._e = new Event(this._id);
     this._initialState = initialState;
     this._state = initialState;
+
+    // Bind methods to this instance
+    const proto = Object.getPrototypeOf(this);
+    Object.getOwnPropertyNames(proto).forEach(func => {
+      if (func !== 'constructor' && typeof this[func] === 'function') {
+        this[func] = this[func].bind(this);
+      }
+    });
   }
 
   register (key, func) {
