@@ -50,7 +50,7 @@ export default function (initialState) {
 
     setState (nextState, actionName, ...actionArgs) {
       if (isObject(_state)) {
-        _state = {..._state, ...nextState};
+        Object.assign(_state, nextState);
       } else {
         _state = nextState;
       }
