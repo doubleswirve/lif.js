@@ -7,3 +7,4 @@
 - [ ] maybe add `setState` method to stateful
 - [ ] make a `dom.js` module and expose `lit-html` stuff there
 - [ ] testing setup
+- [ ] code formatter/linter
