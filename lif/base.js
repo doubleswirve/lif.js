@@ -1,14 +1,10 @@
+import {isObject} from './helpers.js';
+
 export default class extends HTMLElement {
   set props (props) {
     // Stashing the props in an instance var here to accommodate
     // the timeout hack in the constructor
     this._props = props;
-    // To be implemented by the subclass
-    this.render();
-  }
-
-  set state (state) {
-    this._state = state;
     // To be implemented by the subclass
     this.render();
   }
@@ -25,5 +21,16 @@ export default class extends HTMLElement {
         this.props = null;
       }
     });
+  }
+
+  setState (nextState) {
+    if (isObject(this._state)) {
+      Object.assign(this._state, nextState);
+    } else {
+      this._state = state;
+    }
+
+    // To be implemented by the subclass
+    this.render();
   }
 };

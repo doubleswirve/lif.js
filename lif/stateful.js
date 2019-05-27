@@ -29,9 +29,7 @@ export default function (name, component, initialState) {
 
       // Unwrap component function to get actual render function
       this._component = component(async (func, ...args) => {
-        // TODO: Set state like store
-        // @see ~L53 in ./store.js
-        this.state = await getNextState(func, this._state, args);
+        this.setState(await getNextState(func, this._state, args));
       });
     }
 
