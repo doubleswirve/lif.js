@@ -1,4 +1,4 @@
-import {html} from '../../../../node_modules/lit-html/lit-html.js';
+import {html} from '../../../../lif/dom.js';
 import stateless from '../../../../lif/stateless.js';
 
 const ENTER_KEY = 13;

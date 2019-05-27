@@ -1,4 +1,4 @@
-import {html, render} from '../../../node_modules/lit-html/lit-html.js';
+import {html, render} from '../../../lif/dom.js';
 import stateful from '../../../lif/stateful.js';
 
 const INITIAL_COUNT = 0;
