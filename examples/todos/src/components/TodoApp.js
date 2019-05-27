@@ -5,7 +5,6 @@ import './TodoText.js';
 
 function addTodo (state, text) {
   return {
-    ...state,
     text: '',
     todos: state.todos.concat({
       completed: false,
@@ -17,7 +16,6 @@ function addTodo (state, text) {
 
 function clearTodos (state) {
   return {
-    ...state,
     todos: []
   };
 }
@@ -30,7 +28,6 @@ function removeTodo (state, todo) {
   const index = getTodoIndex(state.todos, todo);
 
   return {
-    ...state,
     todos: state.todos
       .slice(0, index)
       .concat(state.todos.slice(index + 1))
@@ -39,7 +36,6 @@ function removeTodo (state, todo) {
 
 function setText (state, text) {
   return {
-    ...state,
     text
   };
 }
@@ -48,7 +44,6 @@ function toggleTodo (state, todo) {
   const index = getTodoIndex(state.todos, todo);
 
   return {
-    ...state,
     todos: state.todos
       .slice(0, index)
       .concat(
