@@ -1,7 +1,4 @@
-export function isObject (maybeObj) {
-  const obj = {};
-  return obj.toString.call(maybeObj) === '[object Object]';
-}
+import {isObject} from './helpers.js';
 
 export default function (initialState) {
   let _actions = {};
