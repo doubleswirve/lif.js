@@ -13,7 +13,6 @@ export function getState (state, nextState) {
       ...nextState
     };
   }
-
   return nextState;
 }
 

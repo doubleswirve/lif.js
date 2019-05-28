@@ -7,15 +7,12 @@ export default class extends HTMLElement {
     // HACK: Stashing the props in an instance var here to accommodate
     // the timeout hack in the constructor
     this._props = props;
-
     this.doRender();
   }
 
   constructor () {
     super();
-
     this.attachShadow({ mode: 'open' });
-
     // HACK: Workaround to force props setter method to be triggered
     // if the user does not provide props
     setTimeout(() => {
@@ -33,7 +30,6 @@ export default class extends HTMLElement {
     if (!this.lifecycle[funcName]) {
       return;
     }
-
     // To be implemented by the subclass
     this.lifecycle[funcName](...this.getLifecycleArgs(funcName));
   }

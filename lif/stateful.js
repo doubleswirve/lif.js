@@ -17,15 +17,11 @@ export default function (name, component, initialState, lifecycle = {}) {
 
       constructor () {
         super();
-
         this.lifecycle = lifecycle;
-
         // HACK: Avoid setter method so render method is not triggered
         this.state = initialState;
-
         // Bind methods to instance that will be passed to dispatchers
         this.setState = this.setState.bind(this);
-
         // Unwrap component function to get actual render function
         this._component = component(async (func, ...args) => {
           const { initialState, props, state, setState } = this;
@@ -35,7 +31,6 @@ export default function (name, component, initialState, lifecycle = {}) {
             state,
             setState
           };
-
           setState(await getNextState(func, ctx, args));
         });
       }
@@ -51,7 +46,6 @@ export default function (name, component, initialState, lifecycle = {}) {
 
       setState (nextState) {
         this.state = getState(this.state, nextState);
-
         this.doRender();
       }
     }

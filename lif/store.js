@@ -31,7 +31,6 @@ export default function (initialState) {
 
     register (actionName, actionHandler) {
       actions[actionName] = actionHandler;
-
       return (...actionArgs) => {
         this.send(actionName, ...actionArgs);
       };
@@ -49,7 +48,6 @@ export default function (initialState) {
 
     setState (nextState, actionName, args) {
       state = getState(state, nextState);
-
       // Use built-in event system
       // @see https://gist.github.com/anasnakawa/9205494
       const e = new CustomEvent(eventName, {
@@ -58,7 +56,6 @@ export default function (initialState) {
           args
         }
       });
-
       dispatchEvent(e);
     },
 

@@ -11,7 +11,6 @@ export default function (name, component, lifecycle = {}) {
     class extends Base {
       constructor () {
         super();
-
         this.lifecycle = lifecycle;
       }
 
