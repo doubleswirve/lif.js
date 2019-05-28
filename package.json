@@ -8,7 +8,7 @@
   },
   "scripts": {
     "format": "prettier-standard '**/*.{css,html,js,json,md}'",
-    "start": "live-server .",
+    "start": "live-server --port=3000 .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
