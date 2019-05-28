@@ -16,7 +16,7 @@ export default class extends HTMLElement {
     // HACK: Workaround to force props setter method to be triggered
     // if the user does not provide props
     setTimeout(() => {
-      if (this._props === undefined) {
+      if (!this.mounted) {
         this.props = null;
       }
     });
@@ -31,7 +31,7 @@ export default class extends HTMLElement {
       return;
     }
     // To be implemented by the subclass
-    this.lifecycle[funcName](...this.getLifecycleArgs(funcName));
+    this.lifecycle[funcName](this.getLifecycleArgs(funcName));
   }
 
   doRender () {
