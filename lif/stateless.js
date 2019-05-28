@@ -15,6 +15,10 @@ export default function (name, component, lifecyle = {}) {
         this.lifecyle = lifecyle;
       }
 
+      getLifecycleArgs () {
+        return [this.shadowRoot, this.props];
+      }
+
       render () {
         const res = component(this.props);
         render(res, this.shadowRoot);

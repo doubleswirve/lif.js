@@ -40,6 +40,10 @@ export default function (name, component, initialState, lifecyle = {}) {
         });
       }
 
+      getLifecycleArgs () {
+        return [this.shadowRoot, this.props, this.state, this.setState];
+      }
+
       render () {
         const res = this._component(this.props, this.state);
         render(res, this.shadowRoot);
