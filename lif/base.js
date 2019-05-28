@@ -7,8 +7,8 @@ export default class extends HTMLElement {
     // HACK: Stashing the props in an instance var here to accommodate
     // the timeout hack in the constructor
     this._props = props;
-    // To be implemented by the subclass
-    this.render();
+
+    this.doRender();
   }
 
   constructor () {
@@ -23,5 +23,31 @@ export default class extends HTMLElement {
         this.props = null;
       }
     });
+  }
+
+  disconnectedCallback () {
+    this.doLifecycleFunc('destroyed');
+  }
+
+  doLifecycleFunc (funcName) {
+    if (!this.lifecyle[funcName]) {
+      return;
+    }
+
+    // To be implemented by the subclass
+    this.lifecyle[funcName](...this.getLifecycleArgs(funcName));
+  }
+
+  doRender () {
+    // To be implemented by the subclass
+    this.render();
+
+    if (this.mounted) {
+      this.doLifecycleFunc('updated');
+    } else {
+      this.mounted = true;
+
+      this.doLifecycleFunc('mounted');
+    }
   }
 }

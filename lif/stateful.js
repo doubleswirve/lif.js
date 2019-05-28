@@ -7,7 +7,7 @@ import { getNextState, getState } from './helpers.js';
  * @param {Function} component
  * @param {any}      initialState
  */
-export default function (name, component, initialState) {
+export default function (name, component, initialState, lifecyle = {}) {
   customElements.define(
     name,
     class extends Base {
@@ -17,6 +17,8 @@ export default function (name, component, initialState) {
 
       constructor () {
         super();
+
+        this.lifecyle = lifecyle;
 
         // HACK: Avoid setter method so render method is not triggered
         this.state = initialState;
@@ -45,8 +47,8 @@ export default function (name, component, initialState) {
 
       setState (nextState) {
         this.state = getState(this.state, nextState);
-        // To be implemented by the subclass
-        this.render();
+
+        this.doRender();
       }
     }
   );
