@@ -8,7 +8,7 @@
   },
   "scripts": {
     "format": "prettier-standard '**/*.{css,html,js,json,md}'",
-    "start": "python -m SimpleHTTPServer",
+    "start": "live-server .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,6 +28,7 @@
     "lit-html": "1.0.0"
   },
   "devDependencies": {
+    "live-server": "1.2.1",
     "prettier-standard": "9.1.1"
   }
 }
