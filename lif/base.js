@@ -1,5 +1,3 @@
-import {getState} from './helpers.js';
-
 export default class extends HTMLElement {
   get props () {
     return this._props;
@@ -25,11 +23,5 @@ export default class extends HTMLElement {
         this.props = null;
       }
     });
-  }
-
-  setState (nextState) {
-    this._state = getState(this._state, nextState);
-    // To be implemented by the subclass
-    this.render();
   }
 };

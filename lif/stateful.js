@@ -1,6 +1,6 @@
 import {render} from './dom.js';
 import Base from './base.js';
-import {getNextState} from './helpers.js'
+import {getNextState, getState} from './helpers.js';
 
 /**
  * @param {string}   name
@@ -17,21 +17,39 @@ export default function (name, component, initialState) {
       super();
 
       // HACK: Avoid setter method so render method is not triggered
-      this._state = initialState;
+      this.state = initialState;
+
+      // Bind methods to instance that will be passed to dispatchers
+      this.setState = this.setState.bind(this);
 
       // Unwrap component function to get actual render function
       this._component = component(async (func, ...args) => {
+        const {
+          initialState,
+          props,
+          state,
+          setState
+        } = this;
         const ctx = {
-          props: this._props,
-          state: this._state
+          initialState,
+          props,
+          state,
+          setState
         };
-        this.setState(await getNextState(func, ctx, args));
+
+        setState(await getNextState(func, ctx, args));
       });
     }
 
     render () {
-      const res = this._component(this._props, this._state);
+      const res = this._component(this.props, this.state);
       render(res, this.shadowRoot);
+    }
+
+    setState (nextState) {
+      this.state = getState(this.state, nextState);
+      // To be implemented by the subclass
+      this.render();
     }
   });
 };
