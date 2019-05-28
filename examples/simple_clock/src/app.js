@@ -30,7 +30,7 @@ function getStyle (backgroundColor) {
 }
 
 const lifecycle = {
-  mounted (_shadowRoot, _props, _state, setState) {
+  mounted ({ setState }) {
     console.log('MOUNTED', Date.now());
     setTimeout(() => {
       const date = new Date();
@@ -44,7 +44,7 @@ const lifecycle = {
     }, 1e3);
   },
 
-  updated (_shadowRoot, _props, _state, setState) {
+  updated ({ setState }) {
     console.log('UPDATED', Date.now());
     setTimeout(() => {
       const date = new Date();
