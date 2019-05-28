@@ -9,7 +9,7 @@ export default function (name, component) {
   customElements.define(name, class extends Base {
     render () {
       const res = component(this._props);
-      render(res, this._shadowRoot);
+      render(res, this.shadowRoot);
     }
   });
 };

@@ -15,7 +15,7 @@ export default function (name, component, store) {
 
     render () {
       const res = component(store)(this._props)
-      render(res, this._shadowRoot);
+      render(res, this.shadowRoot);
     }
   });
 };

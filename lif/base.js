@@ -1,8 +1,12 @@
 import {getState} from './helpers.js';
 
 export default class extends HTMLElement {
+  get props () {
+    return this._props;
+  }
+
   set props (props) {
-    // Stashing the props in an instance var here to accommodate
+    // HACK: Stashing the props in an instance var here to accommodate
     // the timeout hack in the constructor
     this._props = props;
     // To be implemented by the subclass
@@ -12,7 +16,7 @@ export default class extends HTMLElement {
   constructor () {
     super();
 
-    this._shadowRoot = this.attachShadow({mode: 'open'});
+    this.attachShadow({mode: 'open'});
 
     // HACK: Workaround to force props setter method to be triggered
     // if the user does not provide props
