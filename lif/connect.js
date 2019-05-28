@@ -14,6 +14,12 @@ export default function (name, component, store, lifecycle = {}) {
         super();
         this.lifecycle = lifecycle;
         store.subscribe(this.doRender.bind(this));
+        this.doLifecycleFunc('created');
+      }
+
+      getLifecycleArgs () {
+        const { props, shadowRoot } = this;
+        return { props, shadowRoot };
       }
 
       render () {
