@@ -1,4 +1,4 @@
-import {isObject} from './helpers.js';
+import {getState} from './helpers.js';
 
 export default class extends HTMLElement {
   set props (props) {
@@ -24,12 +24,7 @@ export default class extends HTMLElement {
   }
 
   setState (nextState) {
-    if (isObject(this._state)) {
-      Object.assign(this._state, nextState);
-    } else {
-      this._state = state;
-    }
-
+    this._state = getState(this._state, nextState);
     // To be implemented by the subclass
     this.render();
   }

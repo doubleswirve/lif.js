@@ -3,15 +3,15 @@ import stateful from '../../../lif/stateful.js';
 
 const INITIAL_COUNT = 0;
 
-function inc (state) {
+function inc ({state}) {
   return state + 1;
 }
 
-function dec (state) {
+function dec ({state}) {
   return state - 1;
 }
 
-function reset (_) {
+function reset () {
   return INITIAL_COUNT;
 }
 

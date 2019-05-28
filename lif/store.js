@@ -1,4 +1,4 @@
-import {isObject} from './helpers.js';
+import {getNextState, getState} from './helpers.js';
 
 export default function (initialState) {
   let _actions = {};
@@ -39,23 +39,21 @@ export default function (initialState) {
       this.setState(initialState, 'lif.store.reset');
     },
 
-    async send (actionName, ...actionArgs) {
-      const actionHandler = _actions[actionName];
-      const nextState = await actionHandler(this, ...actionArgs);
-      this.setState(nextState, actionName, ...actionArgs);
+    async send (actionName, ...args) {
+      this.setState(
+        await getNextState(_actions[actionName], this, args),
+        actionName,
+        args
+      );
     },
 
-    setState (nextState, actionName, ...actionArgs) {
-      if (isObject(_state)) {
-        Object.assign(_state, nextState);
-      } else {
-        _state = nextState;
-      }
+    setState (nextState, actionName, args) {
+      _state = getState(_state, nextState);
 
       // Use built-in event system
       // @see https://gist.github.com/anasnakawa/9205494
       const e = new CustomEvent(eventName, {
-        detail: {actionName, actionArgs}
+        detail: {actionName, args}
       });
 
       dispatchEvent(e);

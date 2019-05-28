@@ -3,7 +3,7 @@ import stateful from '../../../../lif/stateful.js';
 import './TodoItem.js';
 import './TodoText.js';
 
-function addTodo (state, text) {
+function addTodo ({state}, text) {
   return {
     text: '',
     todos: state.todos.concat({
@@ -14,7 +14,7 @@ function addTodo (state, text) {
   };
 }
 
-function clearTodos (state) {
+function clearTodos () {
   return {
     todos: []
   };
@@ -24,7 +24,7 @@ function getTodoIndex (todos, todo) {
   return todos.findIndex(({id}) => id === todo.id);
 }
 
-function removeTodo (state, todo) {
+function removeTodo ({state}, todo) {
   const index = getTodoIndex(state.todos, todo);
 
   return {
@@ -34,13 +34,13 @@ function removeTodo (state, todo) {
   };
 }
 
-function setText (state, text) {
+function setText (_, text) {
   return {
     text
   };
 }
 
-function toggleTodo (state, todo) {
+function toggleTodo ({state}, todo) {
   const index = getTodoIndex(state.todos, todo);
 
   return {
