@@ -22,5 +22,8 @@
   "homepage": "https://github.com/doubleswirve/lif.js#readme",
   "dependencies": {
     "lit-html": "1.0.0"
+  },
+  "devDependencies": {
+    "prettier-standard": "9.1.1"
   }
 }
