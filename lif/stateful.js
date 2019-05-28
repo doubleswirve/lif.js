@@ -33,10 +33,18 @@ export default function (name, component, initialState, lifecycle = {}) {
           };
           setState(await getNextState(func, ctx, args));
         });
+        this.doLifecycleFunc('created');
       }
 
       getLifecycleArgs () {
-        return [this.shadowRoot, this.props, this.state, this.setState];
+        const { initialState, props, setState, shadowRoot, state } = this;
+        return {
+          initialState,
+          props,
+          setState,
+          shadowRoot,
+          state
+        };
       }
 
       render () {

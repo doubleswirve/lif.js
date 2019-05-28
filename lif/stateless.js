@@ -12,10 +12,12 @@ export default function (name, component, lifecycle = {}) {
       constructor () {
         super();
         this.lifecycle = lifecycle;
+        this.doLifecycleFunc('created');
       }
 
       getLifecycleArgs () {
-        return [this.shadowRoot, this.props];
+        const { props, shadowRoot } = this;
+        return { props, shadowRoot };
       }
 
       render () {
