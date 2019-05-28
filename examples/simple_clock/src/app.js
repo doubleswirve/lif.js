@@ -2,10 +2,12 @@ import { html, render } from '../../../lif/dom.js';
 import { styleMap } from '../../../node_modules/lit-html/directives/style-map.js';
 import stateful from '../../../lif/stateful.js';
 
+// @see https://stackoverflow.com/a/1152508/1858091
 function getRandomBackgroundColor () {
   return '#' + (0x1000000 + Math.random() * 0xffffff).toString(16).substr(1, 6);
 }
 
+// @see https://stackoverflow.com/a/41491220/1858091
 function getColor (backgroundColor) {
   const color = backgroundColor.substring(1);
   // hexTo{R,G,B}
