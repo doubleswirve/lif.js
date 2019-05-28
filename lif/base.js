@@ -27,11 +27,10 @@ export default class extends HTMLElement {
   }
 
   doLifecycleFunc (funcName) {
-    if (!this.lifecycle[funcName]) {
-      return;
+    if (this.lifecycle[funcName]) {
+      // To be implemented by the subclass
+      this.lifecycle[funcName](this.getLifecycleArgs(funcName));
     }
-    // To be implemented by the subclass
-    this.lifecycle[funcName](this.getLifecycleArgs(funcName));
   }
 
   doRender () {
@@ -42,7 +41,6 @@ export default class extends HTMLElement {
       this.doLifecycleFunc('updated');
     } else {
       this.mounted = true;
-
       this.doLifecycleFunc('mounted');
     }
   }

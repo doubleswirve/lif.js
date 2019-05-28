@@ -2,11 +2,6 @@ import { render } from './dom.js';
 import Base from './base.js';
 import { getNextState, getState } from './helpers.js';
 
-/**
- * @param {string}   name
- * @param {Function} component
- * @param {any}      initialState
- */
 export default function (name, component, initialState, lifecycle = {}) {
   customElements.define(
     name,

@@ -1,11 +1,6 @@
 import { render } from './dom.js';
 import Base from './base.js';
 
-/**
- * @param {string}   name
- * @param {Function} component
- * @param {Object}   store
- */
 export default function (name, component, store, lifecycle = {}) {
   customElements.define(
     name,
