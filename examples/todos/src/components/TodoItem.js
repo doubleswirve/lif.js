@@ -1,7 +1,7 @@
-import {html} from '../../../../node_modules/lit-html/lit-html.js';
+import { html } from '../../../../lif/dom.js';
 import stateless from '../../../../lif/stateless.js';
 
-stateless('todo-item', ({todo, toggleTodo, removeTodo}) => {
+stateless('todo-item', ({ todo, toggleTodo, removeTodo }) => {
   return html`
     <style>
       li {
@@ -24,15 +24,16 @@ stateless('todo-item', ({todo, toggleTodo, removeTodo}) => {
           .checked=${todo.completed}
           @click=${() => toggleTodo(todo)}
           type="checkbox"
-        >
-        ${todo.completed
-          ? html`<strike>${todo.text}</strike>`
-          : todo.text
+        />
+        ${
+          todo.completed
+            ? html`
+                <strike>${todo.text}</strike>
+              `
+            : todo.text
         }
       </label>
-      <button
-        @click=${() => removeTodo(todo)}
-      >
+      <button @click=${() => removeTodo(todo)}>
         delete me
       </button>
     </li>

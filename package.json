@@ -7,7 +7,8 @@
     "example": "examples"
   },
   "scripts": {
-    "start": "python -m SimpleHTTPServer",
+    "format": "prettier-standard '**/*.{css,html,js,json,md}'",
+    "start": "live-server --port=3000 .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,7 +21,14 @@
     "url": "https://github.com/doubleswirve/lif.js/issues"
   },
   "homepage": "https://github.com/doubleswirve/lif.js#readme",
+  "prettier": {
+    "semi": true
+  },
   "dependencies": {
     "lit-html": "1.0.0"
+  },
+  "devDependencies": {
+    "live-server": "1.2.1",
+    "prettier-standard": "9.1.1"
   }
 }

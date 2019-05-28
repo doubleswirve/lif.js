@@ -1,23 +1,18 @@
 export default class extends HTMLElement {
-  set props (props) {
-    // Stashing the props in an instance var here to accommodate
-    // the timeout hack in the constructor
-    this._props = props;
-    // To be implemented by the subclass
-    this.render();
+  get props () {
+    return this._props;
   }
 
-  set state (state) {
-    this._state = state;
-    // To be implemented by the subclass
-    this.render();
+  set props (props) {
+    // HACK: Stashing the props in an instance var here to accommodate
+    // the timeout hack in the constructor
+    this._props = props;
+    this.doRender();
   }
 
   constructor () {
     super();
-
-    this._shadowRoot = this.attachShadow({mode: 'open'});
-
+    this.attachShadow({ mode: 'open' });
     // HACK: Workaround to force props setter method to be triggered
     // if the user does not provide props
     setTimeout(() => {
@@ -26,4 +21,29 @@ export default class extends HTMLElement {
       }
     });
   }
-};
+
+  disconnectedCallback () {
+    this.doLifecycleFunc('destroyed');
+  }
+
+  doLifecycleFunc (funcName) {
+    if (!this.lifecycle[funcName]) {
+      return;
+    }
+    // To be implemented by the subclass
+    this.lifecycle[funcName](...this.getLifecycleArgs(funcName));
+  }
+
+  doRender () {
+    // To be implemented by the subclass
+    this.render();
+
+    if (this.mounted) {
+      this.doLifecycleFunc('updated');
+    } else {
+      this.mounted = true;
+
+      this.doLifecycleFunc('mounted');
+    }
+  }
+}

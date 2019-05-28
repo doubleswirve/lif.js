@@ -1,19 +1,18 @@
-export function isObject (maybeObj) {
-  const obj = {};
-  return obj.toString.call(maybeObj) === '[object Object]';
-}
+import { getNextState, getState } from './helpers.js';
 
 export default function (initialState) {
-  let _actions = {};
-  let _state = initialState;
+  let actions = {};
+  let state = initialState;
 
   // Set up "unique" identifier for store instance
   // @see https://gist.github.com/gordonbrander/2230317
-  const id = Math.random().toString(36).substr(2, 9);
+  const id = Math.random()
+    .toString(36)
+    .substr(2, 9);
   const eventName = `lif.store.${id}`;
 
   // Meat n' potatoes
-  let _store = {
+  let store = {
     get eventName () {
       return eventName;
     },
@@ -27,40 +26,36 @@ export default function (initialState) {
     },
 
     get state () {
-      return _state;
+      return state;
     },
 
     register (actionName, actionHandler) {
-      _actions[actionName] = actionHandler;
-
+      actions[actionName] = actionHandler;
       return (...actionArgs) => {
         this.send(actionName, ...actionArgs);
-      }
+      };
     },
 
     reset () {
       this.setState(initialState, 'lif.store.reset');
     },
 
-    async send (actionName, ...actionArgs) {
-      const actionHandler = _actions[actionName];
-      const nextState = await actionHandler(this, ...actionArgs);
-      this.setState(nextState, actionName, ...actionArgs);
+    async send (actionName, ...args) {
+      const actionHandler = actions[actionName];
+      const nextState = await getNextState(actionHandler, this, args);
+      this.setState(nextState, actionName, args);
     },
 
-    setState (nextState, actionName, ...actionArgs) {
-      if (isObject(_state)) {
-        Object.assign(_state, nextState);
-      } else {
-        _state = nextState;
-      }
-
+    setState (nextState, actionName, args) {
+      state = getState(state, nextState);
       // Use built-in event system
       // @see https://gist.github.com/anasnakawa/9205494
       const e = new CustomEvent(eventName, {
-        detail: {actionName, actionArgs}
+        detail: {
+          actionName,
+          args
+        }
       });
-
       dispatchEvent(e);
     },
 
@@ -74,13 +69,13 @@ export default function (initialState) {
   };
 
   // Bind context for store functions
-  const proto = Object.getPrototypeOf(_store);
+  const proto = Object.getPrototypeOf(store);
 
   Object.getOwnPropertyNames(proto).forEach(funcName => {
-    if (typeof _store[funcName] === 'function') {
-      _store[funcName] = _store[funcName].bind(_store);
+    if (typeof store[funcName] === 'function') {
+      store[funcName] = store[funcName].bind(store);
     }
   });
 
-  return _store;
-};
+  return store;
+}

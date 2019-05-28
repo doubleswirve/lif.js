@@ -1,4 +1,4 @@
-import {render} from '../node_modules/lit-html/lit-html.js';
+import { render } from './dom.js';
 import Base from './base.js';
 
 /**
@@ -6,16 +6,20 @@ import Base from './base.js';
  * @param {Function} component
  * @param {Object}   store
  */
-export default function (name, component, store) {
-  customElements.define(name, class extends Base {
-    constructor () {
-      super();
-      store.subscribe(this.render.bind(this));
-    }
+export default function (name, component, store, lifecycle = {}) {
+  customElements.define(
+    name,
+    class extends Base {
+      constructor () {
+        super();
+        this.lifecycle = lifecycle;
+        store.subscribe(this.doRender.bind(this));
+      }
 
-    render () {
-      const res = component(store)(this._props)
-      render(res, this._shadowRoot);
+      render () {
+        const res = component(store)(this.props);
+        render(res, this.shadowRoot);
+      }
     }
-  });
-};
+  );
+}
