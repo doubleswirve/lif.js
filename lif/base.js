@@ -30,12 +30,12 @@ export default class extends HTMLElement {
   }
 
   doLifecycleFunc (funcName) {
-    if (!this.lifecyle[funcName]) {
+    if (!this.lifecycle[funcName]) {
       return;
     }
 
     // To be implemented by the subclass
-    this.lifecyle[funcName](...this.getLifecycleArgs(funcName));
+    this.lifecycle[funcName](...this.getLifecycleArgs(funcName));
   }
 
   doRender () {

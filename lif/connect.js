@@ -6,13 +6,14 @@ import Base from './base.js';
  * @param {Function} component
  * @param {Object}   store
  */
-export default function (name, component, store) {
+export default function (name, component, store, lifecycle = {}) {
   customElements.define(
     name,
     class extends Base {
       constructor () {
         super();
-        store.subscribe(this.render.bind(this));
+        this.lifecycle = lifecycle;
+        store.subscribe(this.doRender.bind(this));
       }
 
       render () {

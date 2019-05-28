@@ -5,14 +5,14 @@ import Base from './base.js';
  * @param {string}   name
  * @param {Function} component
  */
-export default function (name, component, lifecyle = {}) {
+export default function (name, component, lifecycle = {}) {
   customElements.define(
     name,
     class extends Base {
       constructor () {
         super();
 
-        this.lifecyle = lifecyle;
+        this.lifecycle = lifecycle;
       }
 
       getLifecycleArgs () {
