@@ -1,4 +1,4 @@
-import {render} from './dom.js';
+import { render } from './dom.js';
 import Base from './base.js';
 
 /**
@@ -6,10 +6,13 @@ import Base from './base.js';
  * @param {Function} component
  */
 export default function (name, component) {
-  customElements.define(name, class extends Base {
-    render () {
-      const res = component(this.props);
-      render(res, this.shadowRoot);
+  customElements.define(
+    name,
+    class extends Base {
+      render () {
+        const res = component(this.props);
+        render(res, this.shadowRoot);
+      }
     }
-  });
-};
+  );
+}

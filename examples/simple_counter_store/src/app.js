@@ -1,25 +1,19 @@
-import {html, render} from '../../../lif/dom.js';
+import { html, render } from '../../../lif/dom.js';
 import connect from '../../../lif/connect.js';
 import store from './store.js';
-import {increment, decrement, changeType, reset} from './actions.js';
-import {displayByNumSys} from './utils.js'
+import { increment, decrement, changeType, reset } from './actions.js';
+import { displayByNumSys } from './utils.js';
 
 connect(
   'counter-buttons',
   _ => _ => html`
-    <button
-      @click=${increment}
-    >
+    <button @click=${increment}>
       inc
     </button>
-    <button
-      @click=${decrement}
-    >
+    <button @click=${decrement}>
       dec
     </button>
-    <button
-      @click=${reset}
-    >
+    <button @click=${reset}>
       reset
     </button>
   `,
@@ -28,18 +22,17 @@ connect(
 
 connect(
   'counter-display-type',
-  ({state}) => _ => html`
-    <select
-      @change=${e => changeType(e.target.value)}
-    >
-      ${['DEC', 'BIN'].map(type => html`
-        <option
-          .selected=${state.type === type}
-          value=${type}
-        >
-          ${type}
-        </option>
-      `)}
+  ({ state }) => _ => html`
+    <select @change=${e => changeType(e.target.value)}>
+      ${
+        ['DEC', 'BIN'].map(
+          type => html`
+            <option .selected=${state.type === type} value=${type}>
+              ${type}
+            </option>
+          `
+        )
+      }
     </select>
   `,
   store
@@ -47,7 +40,7 @@ connect(
 
 connect(
   'counter-display',
-  ({state}) => _ => html`
+  ({ state }) => _ => html`
     <style>
       code,
       pre {

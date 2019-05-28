@@ -14,7 +14,7 @@ export default class extends HTMLElement {
   constructor () {
     super();
 
-    this.attachShadow({mode: 'open'});
+    this.attachShadow({ mode: 'open' });
 
     // HACK: Workaround to force props setter method to be triggered
     // if the user does not provide props
@@ -24,4 +24,4 @@ export default class extends HTMLElement {
       }
     });
   }
-};
+}

@@ -1,4 +1,4 @@
-import {getNextState, getState} from './helpers.js';
+import { getNextState, getState } from './helpers.js';
 
 export default function (initialState) {
   let actions = {};
@@ -6,7 +6,9 @@ export default function (initialState) {
 
   // Set up "unique" identifier for store instance
   // @see https://gist.github.com/gordonbrander/2230317
-  const id = Math.random().toString(36).substr(2, 9);
+  const id = Math.random()
+    .toString(36)
+    .substr(2, 9);
   const eventName = `lif.store.${id}`;
 
   // Meat n' potatoes
@@ -32,7 +34,7 @@ export default function (initialState) {
 
       return (...actionArgs) => {
         this.send(actionName, ...actionArgs);
-      }
+      };
     },
 
     reset () {
@@ -79,4 +81,4 @@ export default function (initialState) {
   });
 
   return store;
-};
+}
