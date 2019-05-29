@@ -1,5 +1,5 @@
-import { html, render } from '../../../lif/dom.js';
-import connect from '../../../lif/connect.js';
+import { html, render } from '../../../node_modules/lit-html/lit-html.js';
+import connect from '../../../src/connect.js';
 import store from './store.js';
 import { increment, decrement, changeType, reset } from './actions.js';
 import { displayByNumSys } from './utils.js';

@@ -8,10 +8,7 @@ export async function getNextState (func, ctx, args) {
 
 export function getState (state, nextState) {
   if (isObject(state) && isObject(nextState)) {
-    return {
-      ...state,
-      ...nextState
-    };
+    return Object.assign({}, state, nextState);
   }
   return nextState;
 }

@@ -1,6 +1,6 @@
 {
   "name": "lif",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha",
   "description": "the front-end framework for perfectionists without ethics",
   "main": "index.js",
   "directories": {
@@ -24,11 +24,11 @@
   "prettier": {
     "semi": true
   },
-  "dependencies": {
-    "lit-html": "1.0.0"
-  },
   "devDependencies": {
     "live-server": "1.2.1",
     "prettier-standard": "9.1.1"
+  },
+  "dependencies": {
+    "lit-html": "1.1.0"
   }
 }

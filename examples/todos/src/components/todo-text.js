@@ -1,5 +1,5 @@
-import { html } from '../../../../lif/dom.js';
-import stateless from '../../../../lif/stateless.js';
+import { html } from '../../../../node_modules/lit-html/lit-html.js';
+import stateless from '../../../../src/stateless.js';
 
 const ENTER_KEY = 13;
 

@@ -1,5 +1,5 @@
-import { html } from '../../../../lif/dom.js';
-import stateless from '../../../../lif/stateless.js';
+import { html } from '../../../../node_modules/lit-html/lit-html.js';
+import stateless from '../../../../src/stateless.js';
 
 stateless('todo-item', ({ todo, toggleTodo, removeTodo }) => {
   return html`
@@ -9,13 +9,13 @@ stateless('todo-item', ({ todo, toggleTodo, removeTodo }) => {
         justify-content: space-between;
       }
 
+      li:hover {
+        background-color: #f5f5f5;
+      }
+
       label {
         cursor: pointer;
         flex: 1;
-      }
-
-      label:hover {
-        background-color: #f5f5f5;
       }
     </style>
     <li>
