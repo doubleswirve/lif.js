@@ -1,14 +1,13 @@
-import { render } from './dom.js';
+import { render } from '../node_modules/lit-html/lit-html.js';
 import Base from './base.js';
 
-export default function (name, component, store, lifecycle = {}) {
+export default function (name, component, lifecycle = {}) {
   customElements.define(
     name,
     class extends Base {
       constructor () {
         super();
         this.lifecycle = lifecycle;
-        store.subscribe(this.doRender.bind(this));
         this.doLifecycleFunc('created');
       }
 
@@ -18,7 +17,7 @@ export default function (name, component, store, lifecycle = {}) {
       }
 
       render () {
-        const res = component(store)(this.props);
+        const res = component(this.props);
         render(res, this.shadowRoot);
       }
     }
