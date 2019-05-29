@@ -1,6 +1,6 @@
-import { html, render } from '../../../lif/dom.js';
+import { html, render } from '../../../node_modules/lit-html/lit-html.js';
 import { styleMap } from '../../../node_modules/lit-html/directives/style-map.js';
-import stateful from '../../../lif/stateful.js';
+import stateful from '../../../src/stateful.js';
 
 // @see https://stackoverflow.com/a/1152508/1858091
 function getRandomBackgroundColor () {

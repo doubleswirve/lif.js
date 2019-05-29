@@ -1,5 +1,5 @@
-import { html, render } from '../../../lif/dom.js';
-import stateful from '../../../lif/stateful.js';
+import { html, render } from '../../../node_modules/lit-html/lit-html.js';
+import stateful from '../../../src/stateful.js';
 
 function preFetchItems () {
   return {

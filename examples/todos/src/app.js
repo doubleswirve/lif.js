@@ -1,5 +1,5 @@
-import { html, render } from '../../../lif/dom.js';
-import './components/TodoApp.js';
+import { html, render } from '../../../node_modules/lit-html/lit-html.js';
+import './components/todo-app.js';
 
 render(
   html`
