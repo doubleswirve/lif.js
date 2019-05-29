@@ -1,20 +1,29 @@
 import { html, render } from '../../../lif/dom.js';
 import stateful from '../../../lif/stateful.js';
 
-async function fetchItems ({ setState }) {
-  setState({ err: '', items: [], pending: true });
+function preFetchItems () {
+  return {
+    err: '',
+    items: [],
+    pending: true
+  };
+}
 
+function postFetchItems () {
+  return {
+    pending: false
+  };
+}
+
+async function fetchItems () {
   try {
     const res = await fetch('./data/items.json');
-
-    setState({ pending: false });
 
     if (!res.ok) {
       throw new Error(`rejected with status ${res.status}`);
     }
 
     const items = await res.json();
-
     return { items };
   } catch (err) {
     return { err };
@@ -40,7 +49,16 @@ stateful(
       }
     </style>
     <h1>simple-fetch</h1>
-    <button .disabled=${pending} @click=${() => dispatch(fetchItems)}>
+    <button
+      .disabled=${pending}
+      @click=${
+        async () => {
+          dispatch(preFetchItems);
+          await dispatch(fetchItems);
+          dispatch(postFetchItems);
+        }
+      }
+    >
       load items
     </button>
     ${
