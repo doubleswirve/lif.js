@@ -17,3 +17,13 @@ export function isObject (maybeObj) {
   const obj = {};
   return obj.toString.call(maybeObj) === '[object Object]';
 }
+
+export function iterFuncProps (obj, func) {
+  Object.getOwnPropertyNames(obj).forEach(name => {
+    if (typeof obj[name] === 'function') {
+      func(obj, name, obj[name]);
+    }
+  });
+
+  return obj;
+}
