@@ -6,7 +6,7 @@
   />
 </p>
 
-# lif.js
+<h1 align="center">lif.js</h1>
 
 ## TODO
 
