@@ -1,23 +1,23 @@
-export default ({initialState}) => ({
-  increment ({count}) {
+export default ({ initialState }) => ({
+  increment ({ count }) {
     return {
       count: count + 1
-    }
+    };
   },
 
-  decrement ({count}) {
+  decrement ({ count }) {
     return {
       count: count - 1
-    }
+    };
   },
 
   changeType (_, type) {
     return {
       type
-    }
+    };
   },
 
-  reset() {
+  reset () {
     return initialState;
   }
 });

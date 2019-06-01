@@ -1,7 +1,12 @@
 import { render } from '../node_modules/lit-html/lit-html.js';
 import Base from './base.js';
 
-export default function (name, component, {store, actions, mapFunc}, lifecycle = {}) {
+export default function (
+  name,
+  component,
+  { store, actions, mapFunc },
+  lifecycle = {}
+) {
   const funcs = actions ? store.bindActions(actions) : {};
   const mapState = mapFunc ? mapFunc : () => ({});
 
