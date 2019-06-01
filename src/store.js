@@ -20,10 +20,6 @@ export default function (initialState) {
       });
     },
 
-    reset () {
-      this.setState(initialState, 'lif.store.reset');
-    },
-
     async send (func, ...args) {
       const nextState = await getNextState(func, state, args);
       this.setState(nextState);
