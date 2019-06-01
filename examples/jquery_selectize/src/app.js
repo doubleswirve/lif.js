@@ -18,6 +18,10 @@ stateful(
       select {
         font-family: Consolas, monospace;
       }
+
+      div {
+        max-width: 400px;
+      }
     </style>
     <h1>jquery-selectize</h1>
     <button @click=${() => dispatch(loadOptions)}>load options</button>
