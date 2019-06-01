@@ -1,6 +1,7 @@
 import { getNextState, getState, iterFuncProps } from './helpers.js';
 
 export default function (initialState) {
+  // Pub/sub via https://gist.github.com/developit/55c48d294abab13a146eac236bae3219
   let listeners = [];
   let state = initialState;
 
