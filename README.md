@@ -1,3 +1,11 @@
+<p align="center">
+  <img
+    alt="sad man (lif), drinking alone at a bar"
+    src="https://raw.githubusercontent.com/doubleswirve/lif.js/master/docs/assets/sad-drinking-lif.png"
+    width="320"
+  />
+</p>
+
 # lif.js
 
 ## TODO
