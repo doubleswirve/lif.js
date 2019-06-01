@@ -1,7 +1,10 @@
 import { render } from '../node_modules/lit-html/lit-html.js';
 import Base from './base.js';
 
-export default function (name, component, store, lifecycle = {}) {
+export default function (name, component, {store, actions, mapFunc}, lifecycle = {}) {
+  const funcs = actions ? store.bindActions(actions) : {};
+  const mapState = mapFunc ? mapFunc : () => ({});
+
   customElements.define(
     name,
     class extends Base {
@@ -18,7 +21,9 @@ export default function (name, component, store, lifecycle = {}) {
       }
 
       render () {
-        const res = component(store)(this.props);
+        const state = mapState(store.state);
+        const props = Object.assign({}, funcs, state, this.props);
+        const res = component(props);
         render(res, this.shadowRoot);
       }
     }

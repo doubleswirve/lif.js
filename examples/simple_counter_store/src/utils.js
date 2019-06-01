@@ -1,4 +1,4 @@
-export function displayByNumSys ({ count, type }) {
+export function displayByNumSys (count, type) {
   switch (type) {
     case 'BIN':
       // @see https://stackoverflow.com/a/16155417/1858091

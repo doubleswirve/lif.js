@@ -1,26 +1,11 @@
-import { getNextState, getState } from './helpers.js';
+import { getNextState, getState, iterFuncProps } from './helpers.js';
 
 export default function (initialState) {
-  let actions = {};
+  // Pub/sub via https://gist.github.com/developit/55c48d294abab13a146eac236bae3219
+  let listeners = [];
   let state = initialState;
 
-  // Set up "unique" identifier for store instance
-  // @see https://gist.github.com/gordonbrander/2230317
-  const id = Math.random()
-    .toString(36)
-    .substr(2, 9);
-  const eventName = `lif.store.${id}`;
-
-  // Meat n' potatoes
   let store = {
-    get eventName () {
-      return eventName;
-    },
-
-    get id () {
-      return id;
-    },
-
     get initialState () {
       return initialState;
     },
@@ -29,53 +14,39 @@ export default function (initialState) {
       return state;
     },
 
-    register (actionName, actionHandler) {
-      actions[actionName] = actionHandler;
-      return (...actionArgs) => {
-        this.send(actionName, ...actionArgs);
-      };
+    bindActions (actions) {
+      return iterFuncProps(actions(this), (obj, name, func) => {
+        obj[name] = ((...args) => this.send(func, ...args)).bind(this);
+      });
     },
 
     reset () {
       this.setState(initialState, 'lif.store.reset');
     },
 
-    async send (actionName, ...args) {
-      const actionHandler = actions[actionName];
-      const nextState = await getNextState(actionHandler, this, args);
-      this.setState(nextState, actionName, args);
+    async send (func, ...args) {
+      const nextState = await getNextState(func, state, args);
+      this.setState(nextState);
     },
 
-    setState (nextState, actionName, args) {
+    setState (nextState) {
       state = getState(state, nextState);
-      // Use built-in event system
-      // @see https://gist.github.com/anasnakawa/9205494
-      const e = new CustomEvent(eventName, {
-        detail: {
-          actionName,
-          args
-        }
-      });
-      dispatchEvent(e);
+      listeners.forEach(func => func(state));
     },
 
-    subscribe (storeListener) {
-      addEventListener(eventName, storeListener);
+    subscribe (func) {
+      listeners.push(func);
     },
 
-    unsubscribe (storeListener) {
-      removeEventListener(eventName, storeListener);
+    unsubscribe (func) {
+      const index = listeners.indexOf(func);
+      if (index > -1) {
+        listeners.splice(index, 1);
+      }
     }
   };
 
-  // Bind context for store functions
-  const proto = Object.getPrototypeOf(store);
-
-  Object.getOwnPropertyNames(proto).forEach(funcName => {
-    if (typeof store[funcName] === 'function') {
-      store[funcName] = store[funcName].bind(store);
-    }
+  return iterFuncProps(store, (obj, name, func) => {
+    obj[name] = obj[name].bind(obj);
   });
-
-  return store;
 }
