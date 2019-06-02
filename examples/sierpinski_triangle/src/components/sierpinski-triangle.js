@@ -1,7 +1,7 @@
 import { html } from '../../../../node_modules/lit-html/lit-html.js';
 import { styleMap } from '../../../../node_modules/lit-html/directives/style-map.js';
 import stateless from '../../../../src/stateless.js';
-import './the-dot.js'
+import './the-dot.js';
 
 const TARGET_SIZE = 32;
 
@@ -13,8 +13,8 @@ function theDot ({ seconds, x, y }) {
   };
   const style = styleMap({
     height: `${size}px`,
-    left: `${x - (TARGET_SIZE / 2)}px`,
-    top: `${y - (TARGET_SIZE / 2)}px`,
+    left: `${x - TARGET_SIZE / 2}px`,
+    top: `${y - TARGET_SIZE / 2}px`,
     width: `${size}px`
   });
 
@@ -37,33 +37,32 @@ function theTriangle ({ seconds, size, x, y }) {
 
   const newSize = size / 2;
   const partialProps = [
-    { x, y: y - (newSize / 2) },
-    { x: x - newSize, y: y + (newSize / 2) },
-    { x: x + newSize, y: y + (newSize / 2) }
+    { x, y: y - newSize / 2 },
+    { x: x - newSize, y: y + newSize / 2 },
+    { x: x + newSize, y: y + newSize / 2 }
   ];
 
   return html`
-    ${partialProps.map(({ x, y }) => {
-      const props = {
-        seconds,
-        size: newSize,
-        x,
-        y
-      };
+    ${
+      partialProps.map(({ x, y }) => {
+        const props = {
+          seconds,
+          size: newSize,
+          x,
+          y
+        };
 
-      return html`
-        <sierpinski-triangle .props=${props}></sierpinski-triangle>
-      `;
-    })}
+        return html`
+          <sierpinski-triangle .props=${props}></sierpinski-triangle>
+        `;
+      })
+    }
   `;
 }
 
 function sierpinskiTriangle (props) {
   return html`
-    ${props.size <= TARGET_SIZE
-      ? theDot(props)
-      : theTriangle(props)
-    }
+    ${props.size <= TARGET_SIZE ? theDot(props) : theTriangle(props)}
   `;
 }
 

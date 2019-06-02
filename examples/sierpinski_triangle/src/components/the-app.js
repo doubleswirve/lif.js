@@ -7,9 +7,8 @@ function theApp () {
   return function ({ elapsed }, { seconds }) {
     const t = (elapsed / 1e3) % 10;
     const scale = 1 + (t < 5 ? 10 - t : t) / 10;
-    const transform =
-      `scaleX(${scale / 2.1}) scaleY(0.4) translateZ(0.1px)`;
-    const style = styleMap({ transform })
+    const transform = `scaleX(${scale / 2.1}) scaleY(0.4) translateZ(0.1px)`;
+    const style = styleMap({ transform });
     const props = {
       seconds,
       size: 1024,
@@ -34,7 +33,7 @@ function theApp () {
         <sierpinski-triangle .props=${props}></sierpinski-triangle>
       </div>
     `;
-  }
+  };
 }
 
 let handle;
@@ -42,9 +41,10 @@ let handle;
 const lifecycle = {
   mounted ({ setState }) {
     handle = setInterval(
-      () => setState(({ seconds }) => ({
-        seconds: seconds >= 9 ? 0 : seconds + 1
-      })),
+      () =>
+        setState(({ seconds }) => ({
+          seconds: seconds >= 9 ? 0 : seconds + 1
+        })),
       1e3
     );
   },

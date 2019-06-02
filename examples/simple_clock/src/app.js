@@ -35,19 +35,18 @@ const lifecycle = {
   mounted ({ setState }) {
     console.log('MOUNTED', Date.now());
 
-    handle = setInterval(
-      () => {
-        const date = new Date();
+    handle = setInterval(() => {
+      const date = new Date();
 
-        setState(() => Object.assign(
+      setState(() =>
+        Object.assign(
           { date },
           date.getSeconds() % 2 === 0
             ? { style: getStyle(getRandomBackgroundColor()) }
             : {}
-        ));
-      },
-      1e3
-    );
+        )
+      );
+    }, 1e3);
   },
 
   destroyed () {
