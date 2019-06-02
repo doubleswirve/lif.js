@@ -18,24 +18,23 @@ function theDot (dispatch) {
   return function ({ size, text }, { hover }) {
     const cls = hover ? '-hover' : '';
     const style = styleMap({
-      fontSize: `${size / 2}px`,
+      backgroundColor: hover ? '#ff0' : '#61dafb',
       lineHeight: `${size}px`
     });
 
     return html`
       <style>
         div {
-          background-color: #d75cf6;
           border-radius: 50%;
-          color: #fff;
+          color: #000;
           cursor: pointer;
           font-family: Consolas, monospace;
+          font-size: 15px;
           text-align: center;
           transition: background-color 0.1s linear;
         }
 
         div.-hover {
-          background-color: #5cd0f6;
           box-shadow: 0 0 10px #fff;
         }
       </style>

@@ -3,7 +3,7 @@ import { styleMap } from '../../../../node_modules/lit-html/directives/style-map
 import stateless from '../../../../src/stateless.js';
 import './the-dot.js';
 
-const TARGET_SIZE = 32;
+const TARGET_SIZE = 25;
 
 function theDot ({ seconds, x, y }) {
   const size = TARGET_SIZE * 1.3;

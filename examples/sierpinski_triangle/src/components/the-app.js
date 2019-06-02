@@ -7,11 +7,11 @@ function theApp () {
   return function ({ elapsed }, { seconds }) {
     const t = (elapsed / 1e3) % 10;
     const scale = 1 + (t < 5 ? 10 - t : t) / 10;
-    const transform = `scaleX(${scale / 2.1}) scaleY(0.5) translateZ(0.1px)`;
+    const transform = `scaleX(${scale / 2.1}) scaleY(0.7) translateZ(0.1px)`;
     const style = styleMap({ transform });
     const props = {
       seconds,
-      size: 1024,
+      size: 1000,
       x: 0,
       y: 0
     };
