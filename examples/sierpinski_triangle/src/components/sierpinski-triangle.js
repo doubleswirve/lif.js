@@ -3,18 +3,16 @@ import { styleMap } from '../../../../node_modules/lit-html/directives/style-map
 import stateless from '../../../../src/stateless.js';
 import './the-dot.js';
 
-const TARGET_SIZE = 25;
-
-function theDot ({ seconds, x, y }) {
-  const size = TARGET_SIZE * 1.3;
+function theDot ({ seconds, targetSize, x, y }) {
+  const size = targetSize * 1.3;
   const props = {
     size,
     text: seconds
   };
   const style = styleMap({
     height: `${size}px`,
-    left: `${x - TARGET_SIZE / 2}px`,
-    top: `${y - TARGET_SIZE / 2}px`,
+    left: `${x - targetSize / 2}px`,
+    top: `${y - targetSize / 2}px`,
     width: `${size}px`
   });
 
@@ -28,11 +26,13 @@ function theDot ({ seconds, x, y }) {
   `;
 }
 
-function theTriangle ({ seconds, size, x, y }) {
-  const delay = performance.now() + 0.8;
+function theTriangle ({ moreWork, seconds, size, targetSize, x, y }) {
+  if (moreWork) {
+    const delay = performance.now() + 0.8;
 
-  while (performance.now() < delay) {
-    // Artificially long execution time
+    while (performance.now() < delay) {
+      // Artificially long execution time
+    }
   }
 
   const newSize = size / 2;
@@ -46,8 +46,10 @@ function theTriangle ({ seconds, size, x, y }) {
     ${
       partialProps.map(({ x, y }) => {
         const props = {
+          moreWork,
           seconds,
           size: newSize,
+          targetSize,
           x,
           y
         };
@@ -62,7 +64,7 @@ function theTriangle ({ seconds, size, x, y }) {
 
 function sierpinskiTriangle (props) {
   return html`
-    ${props.size <= TARGET_SIZE ? theDot(props) : theTriangle(props)}
+    ${props.size <= props.targetSize ? theDot(props) : theTriangle(props)}
   `;
 }
 
