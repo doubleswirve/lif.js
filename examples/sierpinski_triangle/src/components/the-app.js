@@ -29,6 +29,12 @@ function theApp () {
           width: 10px;
         }
       </style>
+      <h1>sierpinski-triangle</h1>
+      <p>
+        <a href="https://github.com/claudiopro/react-fiber-vs-stack-demo"
+          >@see</a
+        >
+      </p>
       <div style=${style}>
         <sierpinski-triangle .props=${props}></sierpinski-triangle>
       </div>
