@@ -26,8 +26,10 @@ export default function (initialState) {
     },
 
     setState (func) {
-      state = getState(state, func(state));
-      listeners.forEach(func => func(state));
+      const prevState = state;
+      const nextState = func(state);
+      state = getState(prevState, nextState);
+      listeners.forEach(func => func(prevState, nextState));
     },
 
     subscribe (func) {

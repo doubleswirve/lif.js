@@ -27,3 +27,25 @@ export function iterFuncProps (obj, func) {
 
   return obj;
 }
+
+// @see https://github.com/tkh44/shallow-compare
+export function shallowDiffers (a, b) {
+  // @see https://stackoverflow.com/a/31538091/1858091
+  if (a !== Object(a)) {
+    return a !== b;
+  }
+
+  for (let key in a) {
+    if (!(key in b)) {
+      return true;
+    }
+  }
+
+  for (let key in b) {
+    if (a[key] !== b[key]) {
+      return true;
+    }
+  }
+
+  return false;
+}

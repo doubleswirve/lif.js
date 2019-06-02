@@ -49,8 +49,10 @@ export default function (name, component, initialState, lifecycle = {}) {
       }
 
       setState (func) {
-        this.state = getState(this.state, func(this.state));
-        this.doRender();
+        const prevState = this.state;
+        const nextState = func(this.state);
+        this.state = getState(prevState, nextState);
+        this.doRender(prevState, nextState);
       }
     }
   );

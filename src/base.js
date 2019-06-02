@@ -1,13 +1,16 @@
+import { shallowDiffers } from './helpers.js';
+
 export default class extends HTMLElement {
   get props () {
     return this._props;
   }
 
-  set props (props) {
+  set props (nextProps) {
     // HACK: Stashing the props in an instance var here to accommodate
     // the timeout hack in the constructor
-    this._props = props;
-    this.doRender();
+    const prevProps = this._props;
+    this._props = nextProps;
+    this.doRender(prevProps, nextProps);
   }
 
   constructor () {
@@ -33,7 +36,11 @@ export default class extends HTMLElement {
     }
   }
 
-  doRender () {
+  doRender (prev, next) {
+    if (!shallowDiffers(prev, next)) {
+      return;
+    }
+
     // To be implemented by the subclass
     this.render();
 
