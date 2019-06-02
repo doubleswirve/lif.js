@@ -22,11 +22,11 @@ export default function (initialState) {
 
     async send (func, ...args) {
       const nextState = await getNextState(func, state, args);
-      this.setState(nextState);
+      this.setState(() => nextState);
     },
 
-    setState (nextState) {
-      state = getState(state, nextState);
+    setState (func) {
+      state = getState(state, func(state));
       listeners.forEach(func => func(state));
     },
 

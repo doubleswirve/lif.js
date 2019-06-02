@@ -26,7 +26,8 @@ export default function (name, component, initialState, lifecycle = {}) {
             state,
             setState
           };
-          setState(await getNextState(func, ctx, args));
+          const nextState = await getNextState(func, ctx, args);
+          setState(() => nextState);
         });
         this.doLifecycleFunc('created');
       }
@@ -47,8 +48,8 @@ export default function (name, component, initialState, lifecycle = {}) {
         render(res, this.shadowRoot);
       }
 
-      setState (nextState) {
-        this.state = getState(this.state, nextState);
+      setState (func) {
+        this.state = getState(this.state, func(this.state));
         this.doRender();
       }
     }
