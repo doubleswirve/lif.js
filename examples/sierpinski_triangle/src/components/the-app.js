@@ -7,7 +7,7 @@ function theApp () {
   return function ({ elapsed }, { seconds }) {
     const t = (elapsed / 1e3) % 10;
     const scale = 1 + (t < 5 ? 10 - t : t) / 10;
-    const transform = `scaleX(${scale / 2.1}) scaleY(0.4) translateZ(0.1px)`;
+    const transform = `scaleX(${scale / 2.1}) scaleY(0.5) translateZ(0.1px)`;
     const style = styleMap({ transform });
     const props = {
       seconds,
@@ -32,6 +32,7 @@ function theApp () {
       <h1>sierpinski-triangle</h1>
       <p>
         <a href="https://github.com/claudiopro/react-fiber-vs-stack-demo"
+        target="_blank"
           >@see</a
         >
       </p>
