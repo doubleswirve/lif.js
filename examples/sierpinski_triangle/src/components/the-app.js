@@ -132,8 +132,8 @@ const lifecycle = {
 const initialState = {
   moreWork: false,
   seconds: 0,
-  size: 1000,
-  targetSize: 25
+  size: 1024,
+  targetSize: 16
 };
 
 stateful('the-app', theApp, initialState, lifecycle);
