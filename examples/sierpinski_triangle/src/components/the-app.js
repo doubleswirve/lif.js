@@ -31,8 +31,9 @@ function theApp () {
       </style>
       <h1>sierpinski-triangle</h1>
       <p>
-        <a href="https://github.com/claudiopro/react-fiber-vs-stack-demo"
-        target="_blank"
+        <a
+          href="https://github.com/claudiopro/react-fiber-vs-stack-demo"
+          target="_blank"
           >@see</a
         >
       </p>
