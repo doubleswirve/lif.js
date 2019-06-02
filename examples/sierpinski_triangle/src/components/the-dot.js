@@ -28,7 +28,6 @@ function theDot (dispatch) {
           border-radius: 50%;
           color: #000;
           cursor: pointer;
-          font-family: Consolas, monospace;
           font-size: 15px;
           text-align: center;
           transition: background-color 0.1s linear;
