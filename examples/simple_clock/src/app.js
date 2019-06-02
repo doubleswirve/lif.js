@@ -29,33 +29,29 @@ function getStyle (backgroundColor) {
   };
 }
 
+let handle;
+
 const lifecycle = {
   mounted ({ setState }) {
     console.log('MOUNTED', Date.now());
-    setTimeout(() => {
-      const date = new Date();
 
-      if (date.getSeconds() % 2 === 0) {
-        const style = getStyle(getRandomBackgroundColor());
-        setState({ date, style });
-      } else {
-        setState({ date });
-      }
-    }, 1e3);
+    handle = setInterval(
+      () => {
+        const date = new Date();
+
+        setState(() => Object.assign(
+          { date },
+          date.getSeconds() % 2 === 0
+            ? { style: getStyle(getRandomBackgroundColor()) }
+            : {}
+        ));
+      },
+      1e3
+    );
   },
 
-  updated ({ setState }) {
-    console.log('UPDATED', Date.now());
-    setTimeout(() => {
-      const date = new Date();
-
-      if (date.getSeconds() % 2 === 0) {
-        const style = getStyle(getRandomBackgroundColor());
-        setState({ date, style });
-      } else {
-        setState({ date });
-      }
-    }, 1e3);
+  destroyed () {
+    clearInterval(handle);
   }
 };
 

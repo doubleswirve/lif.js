@@ -37,23 +37,20 @@ function theApp () {
   }
 }
 
+let handle;
+
 const lifecycle = {
-  mounted ({ setState, state }) {
-    setTimeout(
-      () => setState({
-        seconds: state.seconds  === 9 ? 0 : state.seconds + 1
-      }),
+  mounted ({ setState }) {
+    handle = setInterval(
+      () => setState(({ seconds }) => ({
+        seconds: seconds >= 9 ? 0 : seconds + 1
+      })),
       1e3
     );
   },
 
-  updated ({ setState, state }) {
-    setTimeout(
-      () => setState({
-        seconds: state.seconds  === 9 ? 0 : state.seconds + 1
-      }),
-      1e3
-    );
+  destroyed () {
+    clearInterval(handle);
   }
 };
 
