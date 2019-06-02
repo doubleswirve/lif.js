@@ -51,7 +51,7 @@ const lifecycle = {
     handle = setInterval(
       () =>
         setState(({ seconds }) => ({
-          seconds: seconds >= 9 ? 0 : seconds + 1
+          seconds: (seconds % 10) + 1
         })),
       1e3
     );
