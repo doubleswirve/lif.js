@@ -48,6 +48,7 @@ stateless(
       }
     </style>
     <br />
+    <br />
     <code>(${displayByNumSys(count, type)})</code>
     <code>${type}::${count}</code>
   `
